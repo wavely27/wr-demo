@@ -1,0 +1,12 @@
+@import '~antd/dist/antd.css';
+html,
+body,
+#root {
+  /* 所有通用的样式 */
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+p {
+  margin: 0;
+}

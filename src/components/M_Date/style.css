@@ -1,0 +1,28 @@
+.date {
+  padding-left: 14px;
+  padding-top: 10px;
+  color: #555555;
+  display: inline-flex;
+  align-items: center;
+  /* flex-direction: row | row-reverse | column | column-reverse; */
+  /* flex-wrap: nowrap | wrap | wrap-reverse; */
+  /* flex-flow: <flex-direction> || <flex-wrap>; */
+  /* justify-content: flex-start | flex-end | center | space-between | space-around; */
+  /* align-items: flex-start | flex-end | center | baseline | stretch; */
+  /* align-content: flex-start | flex-end | center | space-between | space-around | stretch; */
+}
+.day {
+  /* order\flex-grow\flex-shrink\flex-basis\flex\align-self */
+  font-size: 32px;
+}
+.light {
+  font-size: 14px;
+  line-height: 12px;
+  color: #999999;
+}
+.month {
+  composes: light;
+}
+.year {
+  composes: light;
+}
