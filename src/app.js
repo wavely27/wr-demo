@@ -2,22 +2,23 @@
  * @Author: hongbai
  * @Date: 2020-06-04 16:05:55
  * @LastEditors: hongbai
- * @LastEditTime: 2020-06-05 14:35:05
+ * @LastEditTime: 2020-06-08 17:36:27
  */
-import React from 'react';
-import AppWrapper from './app/AppWrapper'
-import AppHeader from './app/AppHeader'
-import AppInput from './app/AppInput'
-import AppContext from './app/AppContext'
+import React, { Suspense, useEffect } from 'react';
+import { HashRouter as Router, Route } from 'react-router-dom'
+import Swiper from 'swiper'
 
-const TodoList = () => {
+const Home = React.lazy(() => import('@/app/Home'));
+
+export default () => {
+  useEffect(() => {
+    window.swiper = new Swiper('.root')
+  })
   return (
-    <AppWrapper>
-      <AppHeader />
-      {/* <AppInput /> */}
-      <AppContext />
-    </AppWrapper>
+    <Router>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Route path={'/'} component={Home} />
+      </Suspense>
+    </Router>
   )
 }
-
-export default TodoList

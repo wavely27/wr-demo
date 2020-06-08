@@ -1,0 +1,21 @@
+.floatWrap {
+  border: solid 1px #555555;
+  background: #555555;
+  position: fixed;
+  bottom: 15%;
+  left: 50%;
+  width: 48px;
+  height: 48px;
+  border-radius: 24px;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 42px;
+  font-size: 36px;
+  color: #ffffff;
+  transform: translate(-24px);
+  box-shadow: 0 4px 4px 4px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+.floatWrapHide {
+  
+}

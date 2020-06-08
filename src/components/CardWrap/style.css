@@ -1,0 +1,24 @@
+.taskCard {
+  position: relative;
+  width: 100%;
+  margin-bottom: 48px;
+  background-color: #ffffff;
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 8px rgba(0, 0, 0, 0.1);
+}
+.tap {
+  position: absolute;
+  top: -12px;
+  left: 24px;
+  padding: 0 16px;
+  height: 28px;
+  line-height: 28px;
+  color: #ffffff;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: bold;
+}
+.pad {
+  height: 36px;
+}
