@@ -9,20 +9,22 @@
 .header {
   position: absolute;
   width: 480px;
-  padding: 20px;
+  box-sizing: border-box;
+  padding: 20px 0;
   display: flex;
   justify-content: space-between;
   font-family: initial;
 }
-.inputBox {
-  height: 64px;
-  width: 80%;
-  margin: 12px;
-  min-width: 120px;
-  text-align: center;
-  line-height: 64px;
+.tips {
+  position: absolute;
+  display: flex;
+  right: 24px;
+  top: 0;
+  width: 240px;
+  flex-direction: row-reverse;
 }
 .listBox {
   height: 100%;
   padding: 148px 32px 0;
+  box-sizing: border-box;
 }

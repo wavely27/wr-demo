@@ -1,0 +1,11 @@
+.tip {
+  position: relative;
+  height: 28px;
+  width: 24px;
+  margin: 0 2px;
+  background-color: #cccccc;
+  text-align: center;
+  border-radius: 0 0 12px 12px;
+  color: #ffffff;
+  cursor: pointer;
+}
