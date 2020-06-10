@@ -2,7 +2,7 @@
  * @Author: hongbai
  * @Date: 2020-06-04 16:37:45
  * @LastEditors: hongbai
- * @LastEditTime: 2020-06-08 17:00:54
+ * @LastEditTime: 2020-06-09 09:35:27
  */
 import React, { useState } from 'react'
 import styles from './styles.css'
@@ -40,13 +40,12 @@ const staticTaskData = {
 }
 
 export default () => {
-  const [groupList, setTaskData] = useState(staticTaskData.groupList)
+  const [taskData, setTaskData] = useState(staticTaskData.groupList)
   return (
     <div className={styles.listBox}>
       {
-        groupList.map(group => {
-          const { taskList: list, id, groupName, color } = group
-          console.log('list ===> ', list)
+        taskData.map(group => {
+          const { list, id, groupName, color } = group
           if (list && list.length > 0) {
             return <TaskCard key={id} groupName={groupName} color={color} list={list} />
           }

@@ -2,7 +2,7 @@
  * @Author: hongbai
  * @Date: 2020-06-03 18:11:10
  * @LastEditors: hongbai
- * @LastEditTime: 2020-06-05 17:46:19
+ * @LastEditTime: 2020-06-10 10:24:02
  */
 const path = require('path')
 const resolve = dir => path.resolve(__dirname, dir);
@@ -20,10 +20,18 @@ module.exports = {
   devtool: 'inline-source-map',
   devServer: {
     contentBase: './dist',
-    host: '0.0.0.0'
+    host: '0.0.0.0',
+    port: '5858'
   },
   module: {
     rules: [
+      {
+        test: /\.(mp3)$/,
+        exclude: /(node_modules|bower_components)/,
+        use: {
+          loader: 'file-loader',
+        }
+      },
       {
         test: /\.(js|jsx)$/,
         exclude: /(node_modules|bower_components)/,
