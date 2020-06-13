@@ -2,19 +2,18 @@
  * @Author: hongbai
  * @Date: 2020-06-04 16:37:45
  * @LastEditors: hongbai
- * @LastEditTime: 2020-06-13 13:55:51
+ * @LastEditTime: 2020-06-13 15:25:10
  */
-import React, { useContext } from 'react'
-import { StoreContext } from '@/app.js'
-import styles from './styles.css'
+import React, { useContext, useMemo } from 'react'
+import { StoreContext } from '@/app'
 import TaskGroup from '@/components/TaskGroup'
 import TaskCard from '@/components/TaskCard'
+import styles from './styles.css'
 
-
-export default () => {
+const AppContent = () => {
   const ctx = useContext(StoreContext)
   const { groupList } = ctx.store
-  return (
+  return useMemo(() => (
     <div className={styles.listBox}>
       {
         groupList.map(group => {
@@ -26,5 +25,7 @@ export default () => {
         })
       }
     </div>
-  )
+  ), [groupList])
 }
+
+export default AppContent

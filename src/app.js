@@ -2,9 +2,9 @@
  * @Author: hongbai
  * @Date: 2020-06-04 16:05:55
  * @LastEditors: hongbai
- * @LastEditTime: 2020-06-13 12:03:24
+ * @LastEditTime: 2020-06-13 15:28:34
  */
-import React, { Suspense } from 'react';
+import React, { Suspense, useEffect } from 'react';
 import { HashRouter as Router, Route, Redirect, Switch } from 'react-router-dom'
 import useStoreReducer from '@/hook/useStoreReducer'
 
@@ -39,7 +39,9 @@ const staticStore = {
       color: '#d81c5f',
       taskList: []
     },
-  ]
+  ],
+  groupLastId: 2,
+  taskLastId: 2,
 }
 
 export const StoreContext = React.createContext()
@@ -47,7 +49,7 @@ export const StoreContext = React.createContext()
 export default () => {
   const [store, dispatch] = useStoreReducer()
   // useEffect(() => {
-  //   dispatch({ type: 'updateStore', payload: staticStore })
+  //   dispatch({ type: 'UPDATE_STORE', payload: staticStore })
   // }, [])
 
   return (

@@ -1,7 +1,7 @@
 {
-  "name": "wr-react-hook-demo",
+  "name": "wr-hook-demo",
   "version": "1.0.0",
-  "description": "",
+  "description": "webpack react hook-demo",
   "main": "index.js",
   "private": true,
   "scripts": {

@@ -2,13 +2,13 @@
  * @Author: hongbai
  * @Date: 2020-06-08 14:46:46
  * @LastEditors: hongbai
- * @LastEditTime: 2020-06-13 11:47:15
+ * @LastEditTime: 2020-06-13 15:09:11
  */
 import { useReducer } from 'react'
 import { WR_LIST_DATA } from '@/utils/constant'
 
-function init(initialState) {
-  return initialState || getLocalStorage() || { groupList: [] }
+function init() {
+  return getLocalStorage() || { groupList: [] }
 }
 
 function getLocalStorage() {
@@ -19,6 +19,7 @@ function setLocalStorage(data) {
   window.localStorage.setItem(WR_LIST_DATA, JSON.stringify(data))
 }
 
+// store part update
 function updateTask(store, taskUpdater) {
   const { groupList } = store
   const gl = groupList.map(group => {
@@ -34,18 +35,14 @@ function updateTask(store, taskUpdater) {
   return { groupList: gl }
 }
 
-window.count = 0
-
 function reducer(store, action) {
-  console.log('1 ++ ===> ', window.count++)
   let newStore
   switch (action.type) {
-    case 'updateStore':
+    case 'UPDATE_STORE':
       newStore = action.payload
       setLocalStorage(newStore)
       return { ...newStore }
     case 'UPDATE_TASK':
-      console.log(' ===> ', )
       newStore = updateTask(store, action.payload)
       setLocalStorage(newStore)
       return { ...newStore }
@@ -54,7 +51,7 @@ function reducer(store, action) {
   }
 }
 
-export default (initialState) => {
-  const [state, dispatch] = useReducer(reducer, initialState, init)
+export default () => {
+  const [state, dispatch] = useReducer(reducer, null, init)
   return [state, dispatch]
 }

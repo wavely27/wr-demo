@@ -2,18 +2,16 @@
  * @Author: hongbai
  * @Date: 2020-06-04 16:05:55
  * @LastEditors: hongbai
- * @LastEditTime: 2020-06-13 13:21:23
+ * @LastEditTime: 2020-06-13 15:21:32
  */
-import React from 'react';
+import React, { useMemo } from 'react';
 import AppWrapper from './AppWrapper'
 import AppContent from './AppContent'
-import AppBack from './AppBack'
+import LinkToHome from './LinkToHome'
 
-export default () => {
-  return (
-    <AppWrapper>
-      <AppContent />
-      <AppBack />
-    </AppWrapper>
-  )
-}
+export default () => useMemo(() => (
+  <AppWrapper>
+    <AppContent />
+    <LinkToHome />
+  </AppWrapper>
+), [])
