@@ -2,22 +2,22 @@
  * @Author: hongbai
  * @Date: 2020-06-04 16:37:45
  * @LastEditors: hongbai
- * @LastEditTime: 2020-06-13 17:09:49
+ * @LastEditTime: 2020-06-13 18:14:48
  */
 import React, { useMemo, useContext, useState, useEffect } from 'react'
 import styles from './styles.css'
 import CardWrap from '@/components/CardWrap'
 import { StoreContext } from '@/app'
-import CheckBox from '@/components/CheckBox'
 
 const AppContent = () => {
   const [taskState, setTaskState] = useState({
     groupId: undefined,
     groupName: 'error',
     color: '#ffffff',
-    isImportant: true,
+    isImportant: false,
     taskName: '',
   })
+  const { groupId, color, groupName, isImportant } = taskState
   const ctx = useContext(StoreContext)
   const { groupList } = ctx.store
   useEffect(() => {
@@ -39,7 +39,12 @@ const AppContent = () => {
     }
   }, [taskState.groupId])
 
-  const { groupId, color, groupName, isImportant } = taskState
+  const handleClick = () => {
+    setTaskState(taskState => {
+      return {...taskState, isImportant: !taskState.isImportant}
+    })
+  }
+
   return useMemo(() => (
     <div className={styles.listBox} style={{ color: '#ffffff' }}>
       <CardWrap groupName={groupName} color={color}>
@@ -55,7 +60,7 @@ const AppContent = () => {
           })}
         </div>
         <div className={styles.settingBox}>
-        <span onClick={() => {}} className={styles.sign} style={{ backgroundColor: (isImportant ? color : '#ffffff') }}><span className={`${isImportant && styles.signDone}`} /></span>
+        <span onClick={handleClick} className={styles.sign} style={{ backgroundColor: (isImportant ? color : '#ffffff') }}><span className={`${isImportant && styles.signDone}`} /></span>
           &nbsp;&nbsp;&nbsp;Mark as important
         </div>
       </CardWrap>
