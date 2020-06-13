@@ -2,12 +2,12 @@
  * @Author: hongbai
  * @Date: 2020-06-03 18:52:02
  * @LastEditors: hongbai
- * @LastEditTime: 2020-06-08 16:29:52
- */ 
+ * @LastEditTime: 2020-06-12 18:00:01
+ */
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './app'
-import './style/global.css'
+import './asset/style/global.css'
 import './utils/browser'
 
 ReactDOM.render(
