@@ -2,11 +2,12 @@
  * @Author: hongbai
  * @Date: 2020-06-04 16:05:55
  * @LastEditors: hongbai
- * @LastEditTime: 2020-06-13 15:28:34
+ * @LastEditTime: 2020-06-17 18:29:48
  */
 import React, { Suspense, useEffect } from 'react';
-import { HashRouter as Router, Route, Redirect, Switch } from 'react-router-dom'
+import { Route, Redirect, Switch, useHistory } from 'react-router-dom'
 import useStoreReducer from '@/hook/useStoreReducer'
+import useSuccess from '@/hook/useSuccess'
 
 const Home = React.lazy(() => import('@/app/Home'));
 const Test = React.lazy(() => import('@/app/Test'));
@@ -48,25 +49,25 @@ export const StoreContext = React.createContext()
 
 export default () => {
   const [store, dispatch] = useStoreReducer()
+  const history = useHistory()
+  useSuccess(store, dispatch, history)
   // useEffect(() => {
   //   dispatch({ type: 'UPDATE_STORE', payload: staticStore })
   // }, [])
 
   return (
-    <StoreContext.Provider value={{ store, dispatch }}>
-      <Router>
-        <Suspense fallback={<div>Loading...</div>}>
-          <Switch>
-            <Redirect from={'/'} exact to='/home' />
-            <Route path={'/home'} exact component={Home} />
-            <Route path={'/test'} exact component={Test} />
-            <Route path={'/task'} exact component={Task} />
-            <Route path={'/groups'} exact component={Home} />
-            <Route path={'/group'} exact component={Home} />
-            <Route path={'/'} render={() => <div>no page</div>} />
-          </Switch>
-        </Suspense>
-      </Router>
+    <StoreContext.Provider value={{ store, dispatch, history }}>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Switch>
+          <Redirect from={'/'} exact to='/home' />
+          <Route path={'/home'} exact component={Home} />
+          <Route path={'/test'} exact component={Test} />
+          <Route path={'/task'} exact component={Task} />
+          <Route path={'/groups'} exact component={Home} />
+          <Route path={'/group'} exact component={Home} />
+          <Route path={'/'} render={() => <div>no page</div>} />
+        </Switch>
+      </Suspense>
     </StoreContext.Provider>
   )
 }

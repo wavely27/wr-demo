@@ -2,7 +2,7 @@
  * @Author: hongbai
  * @Date: 2020-06-04 16:37:45
  * @LastEditors: hongbai
- * @LastEditTime: 2020-06-15 10:06:17
+ * @LastEditTime: 2020-06-17 18:39:18
  */
 import React, { useMemo, useContext, useState, useEffect } from 'react'
 import styles from './styles.css'
@@ -11,15 +11,14 @@ import SaveButton from './SaveButton'
 import { StoreContext } from '@/app'
 
 const AppContent = () => {
-  const [groupId, setGroupId] = useState(undefined)
   const [taskState, setTaskState] = useState({
     groupId: undefined,
     groupName: 'error',
     color: '#ffffff',
-    isImportant: false,
+    important: false,
     taskName: '',
   })
-  const { color, groupName, isImportant } = taskState
+  const { color, groupName, important } = taskState
   const ctx = useContext(StoreContext)
   const { groupList } = ctx.store
   useEffect(() => {
@@ -30,7 +29,6 @@ const AppContent = () => {
             const { id, color, groupName } = group
             return { ...taskState, color, groupName, groupId: id }
           })
-          setGroupId(group.id)
         }
       })
     } else {
@@ -38,13 +36,30 @@ const AppContent = () => {
         const { id, color, groupName } = groupList && groupList[0]
         return { ...taskState, color, groupName, groupId: id }
       })
-      setGroupId(groupList[0].id)
     }
-  }, [groupId])
+  }, [taskState.groupId])
 
   const handleClick = () => {
     setTaskState(taskState => {
-      return { ...taskState, isImportant: !taskState.isImportant }
+      return { ...taskState, important: !taskState.important }
+    })
+  }
+
+  const changeGroup = (groupId) => {
+    groupList.forEach(group => {
+      if (group.id === groupId) {
+        setTaskState((taskState) => {
+          const { id, color, groupName } = group
+          return { ...taskState, color, groupName, groupId: id }
+        })
+      }
+    })
+  }
+
+  const taskNameChange = (e) => {
+    const value = e.target.value
+    setTaskState((taskState) => {
+      return { ...taskState, taskName: value }
     })
   }
 
@@ -52,25 +67,25 @@ const AppContent = () => {
     return (
       <div className={styles.listBox} style={{ color: '#ffffff' }}>
         <CardWrap groupName={groupName} color={color}>
-          <input className={styles.input} placeholder='I want to ...' />
+          <input onChange={taskNameChange} className={styles.input} placeholder='I want to ...' />
           <p className={styles.bottomLine} style={{ backgroundColor: color }} />
           <div className={styles.groupBox}>
             {groupList.map(group => {
-              if (group.id === groupId) {
+              if (group.id === taskState.groupId) {
                 return <span className={styles.groupBtn} key={group.id} style={{ color: '#ffffff', backgroundColor: color, borderColor: color }} >{group.groupName}</span>
               }
-              return <span className={styles.groupBtn} key={group.id}>{group.groupName}</span>
+              return <span className={styles.groupBtn} key={group.id} onClick={() => changeGroup(group.id)}>{group.groupName}</span>
             })}
           </div>
           <div className={styles.settingBox}>
-            <span onClick={handleClick} className={styles.sign} style={{ backgroundColor: (isImportant ? color : '#ffffff') }}><span className={`${isImportant && styles.signDone}`} /></span>
+            <span onClick={handleClick} className={styles.sign} style={{ backgroundColor: (important ? color : '#ffffff') }}><span className={`${important && styles.signDone}`} /></span>
             &nbsp;&nbsp;&nbsp;Mark as important
           </div>
         </CardWrap>
-        <SaveButton dataState={taskState} groupId={groupId} />
+        <SaveButton dataState={taskState} />
       </div>
     )
-  }, [taskState, groupId])
+  }, [taskState])
 }
 
 export default AppContent
